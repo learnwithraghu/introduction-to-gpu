@@ -10,6 +10,7 @@
 - Editable vector diagrams for workers, matrices, GPU memory, and AWS architecture
 - Speaker notes with instructor prompts and questions
 - No animations or transitions
+- Portable Arial and Courier New font choices for safer Google Slides import
 
 ## Build From Source
 

@@ -16,7 +16,7 @@ pptx.defineSlideMaster({
   title: 'BLANK',
   background: { color: '111111' },
   objects: [],
-  slideNumber: { x: 9.45, y: 5.22, color: '6E767D', fontFace: 'Arial', fontSize: 8 },
+  slideNumber: { x: 9.05, y: 5.15, color: '6E767D', fontFace: 'Arial', fontSize: 8 },
 });
 
 const S = pptx.ShapeType;
@@ -74,14 +74,20 @@ function circle(slide, x, y, d, fill, lineColor = fill, width = 1) {
 }
 
 function tag(slide, text, x, y, color = C.green) {
-  rect(slide, x, y, 0.9, 0.25, color, true);
-  tx(slide, text.toUpperCase(), x, y + 0.005, 0.9, 0.22, { fontSize: 8, bold: true, color: C.black, align: 'center', charSpacing: 1.2 });
+  const label = text.toUpperCase();
+  const width = Math.min(2.9, Math.max(1.05, 0.34 + label.length * 0.065));
+  const textColor = color === C.black ? C.white : C.black;
+  rect(slide, x, y, width, 0.28, color, true);
+  tx(slide, label, x + 0.06, y + 0.01, width - 0.12, 0.24, { fontSize: 8, bold: true, color: textColor, align: 'center', charSpacing: 1.05 });
 }
 
 function title(slide, kicker, heading, sub = '', dark = true) {
   tag(slide, kicker, 0.55, 0.38, dark ? C.green : C.black);
-  tx(slide, heading, 0.55, 0.78, 8.8, 0.62, { fontSize: 28, bold: true, color: dark ? C.white : C.graphite });
-  if (sub) tx(slide, sub, 0.55, 1.43, 8.6, 0.38, { fontSize: 12, color: dark ? C.muted : '53606A' });
+  const longHeading = heading.length > 42;
+  const headingHeight = longHeading ? 0.82 : 0.52;
+  const subtitleY = longHeading ? 1.64 : 1.4;
+  tx(slide, heading, 0.55, 0.8, 8.8, headingHeight, { fontSize: longHeading ? 25 : 29, bold: true, color: dark ? C.white : C.graphite });
+  if (sub) tx(slide, sub, 0.55, subtitleY, 8.6, 0.3, { fontSize: 12, color: dark ? C.muted : '53606A' });
 }
 
 function footer(slide, text = 'INTRODUCTION TO GPUS') {
@@ -194,7 +200,8 @@ function matrix(slide, x, y, rows, cols, cell, accent = C.green, secondary = C.p
   tx(s, 'GPU', 4.55, 2.48, 0.8, 0.38, { fontSize: 25, bold: true, color: C.black });
   tx(s, 'Many lightweight parallel workers', 4.55, 2.99, 3.15, 0.28, { fontSize: 13, bold: true, color: C.black });
   tx(s, 'Great for regular, repeated operations over large batches of data.', 4.55, 3.43, 3.25, 0.48, { fontSize: 10, color: C.black });
-  for (let i = 0; i < 18; i += 1) worker(s, 7.68 + (i % 3) * 0.46, 2.54 + Math.floor(i / 3) * 0.38, '', C.black, C.black);
+  grid(s, 7.05, 2.58, 6, 3, 0.27, 0.06, [C.black, 'B5E56B']);
+  tx(s, 'many lightweight workers', 6.95, 3.85, 2.05, 0.2, { fontSize: 9, bold: true, color: C.black, align: 'center' });
   tx(s, 'The fit matters.', 3.6, 4.82, 2.8, 0.28, { fontSize: 16, bold: true, color: C.green2, align: 'center' });
   note(s, 'Say: A GPU is optimized for high-throughput parallel workloads. Avoid saying every operation becomes faster. Ask learners for a workload where the same calculation repeats across many items.');
 }
@@ -265,16 +272,16 @@ function matrix(slide, x, y, rows, cols, cell, accent = C.green, secondary = C.p
   const s = darkSlide();
   title(s, 'PARALLEL PATTERN', 'Vector addition: one item per worker', 'Each output element can be calculated independently.');
   tx(s, 'a', 0.75, 2.0, 0.25, 0.28, { fontSize: 18, bold: true, color: C.orange });
-  tx(s, '[ 2   4   6   8 ]', 1.15, 2.0, 2.3, 0.28, { fontSize: 18, bold: true, color: C.white, fontFace: 'Consolas' });
+  tx(s, '[ 2   4   6   8 ]', 1.15, 2.0, 2.3, 0.28, { fontSize: 18, bold: true, color: C.white, fontFace: 'Courier New' });
   tx(s, '+', 0.82, 2.65, 0.2, 0.25, { fontSize: 18, bold: true, color: C.green });
   tx(s, 'b', 1.15, 2.65, 0.25, 0.28, { fontSize: 18, bold: true, color: C.green });
-  tx(s, '[ 1   3   5   7 ]', 1.55, 2.65, 2.3, 0.28, { fontSize: 18, bold: true, color: C.white, fontFace: 'Consolas' });
+  tx(s, '[ 1   3   5   7 ]', 1.55, 2.65, 2.3, 0.28, { fontSize: 18, bold: true, color: C.white, fontFace: 'Courier New' });
   line(s, 3.75, 2.2, 4.45, 2.2, C.green, 2);
-  tx(s, 'c[i] = a[i] + b[i]', 4.78, 2.05, 2.25, 0.35, { fontSize: 16, bold: true, color: C.green2, fontFace: 'Consolas' });
+  tx(s, 'c[i] = a[i] + b[i]', 4.78, 2.05, 2.25, 0.35, { fontSize: 16, bold: true, color: C.green2, fontFace: 'Courier New' });
   for (let i = 0; i < 4; i += 1) {
     worker(s, 4.72 + i * 1.02, 2.76, `T${i}`, C.panel2, i === 0 ? C.green2 : C.green);
     line(s, 5.08 + i * 1.02, 3.27, 5.08 + i * 1.02, 3.68, C.green, 1.2);
-    tx(s, String([3, 7, 11, 15][i]), 4.85 + i * 1.02, 3.78, 0.48, 0.25, { fontSize: 16, bold: true, color: C.white, align: 'center', fontFace: 'Consolas' });
+    tx(s, String([3, 7, 11, 15][i]), 4.85 + i * 1.02, 3.78, 0.48, 0.25, { fontSize: 16, bold: true, color: C.white, align: 'center', fontFace: 'Courier New' });
   }
   tx(s, 'PREDICT BEFORE RUNNING', 3.55, 4.65, 3.3, 0.2, { fontSize: 9, color: C.green, bold: true, charSpacing: 1.4, align: 'center' });
   note(s, 'Ask: What does thread T2 calculate? What happens if the vector has ten million elements? Connect the diagram to the notebook, where PyTorch maps this operation to the selected device.');
@@ -294,7 +301,7 @@ function matrix(slide, x, y, rows, cols, cell, accent = C.green, secondary = C.p
   tx(s, 'many blocks', 4.5, 3.05, 0.9, 0.2, { fontSize: 9, color: '53606A', align: 'center' });
   for (let r = 0; r < 2; r += 1) for (let c = 0; c < 6; c += 1) worker(s, 5.18 + c * 0.58, 2.65 + r * 0.65, '', C.panel2, C.green);
   tx(s, 'THREADS', 5.75, 4.02, 1.2, 0.18, { fontSize: 9, bold: true, color: C.green, align: 'center', charSpacing: 1.1 });
-  tx(s, 'thread  →  block  →  multiprocessor  →  GPU', 2.35, 4.86, 5.5, 0.22, { fontSize: 12, bold: true, color: C.graphite, align: 'center' });
+  tx(s, 'thread  →  block  →  multiprocessor  →  GPU', 2.35, 4.68, 5.5, 0.22, { fontSize: 12, bold: true, color: C.graphite, align: 'center' });
   footer(s, 'GPU ANATOMY');
   note(s, 'Keep this deliberately simplified. Say that frameworks hide most scheduling details. Ask what one thread would calculate in vector addition. Do not spend time on every core or cache type in this free session.');
 }
@@ -332,7 +339,7 @@ function matrix(slide, x, y, rows, cols, cell, accent = C.green, secondary = C.p
     if (i < 2) line(s, x + 0.7, 2.55, x + 2.4, 2.55, C.green, 1.5);
   });
   rect(s, 1.0, 4.27, 7.9, 0.54, C.graphite, true);
-  tx(s, 'Check: torch.cuda.is_available()', 1.2, 4.44, 7.5, 0.2, { fontSize: 12, bold: true, color: C.green2, fontFace: 'Consolas', align: 'center' });
+  tx(s, 'Check: torch.cuda.is_available()', 1.2, 4.44, 7.5, 0.2, { fontSize: 12, bold: true, color: C.green2, fontFace: 'Courier New', align: 'center' });
   footer(s, 'GOOGLE COLAB');
   note(s, 'Walk learners through Runtime > Change runtime type > GPU. Ask: what does available mean? Hardware exists, or our code is using it? Mention that GPU model and timing vary between Colab sessions.');
 }
@@ -428,7 +435,7 @@ function matrix(slide, x, y, rows, cols, cell, accent = C.green, secondary = C.p
   nodes.forEach((n, i) => {
     rect(s, n[0], n[1], n[2], n[3], n[6], true);
     tx(s, n[4], n[0] + 0.08, n[1] + 0.19, n[2] - 0.16, 0.2, { fontSize: 10, bold: true, color: C.black, align: 'center', charSpacing: 0.7 });
-    tx(s, n[5], n[0] + 0.08, n[1] + 0.5, n[2] - 0.16, 0.16, { fontSize: 8, color: C.black, align: 'center' });
+    tx(s, n[5], n[0] + 0.08, n[1] + 0.49, n[2] - 0.16, 0.22, { fontSize: 9, color: C.black, align: 'center' });
     if (i < nodes.length - 1) line(s, n[0] + n[2] + 0.04, 2.93, nodes[i + 1][0] - 0.07, 2.93, C.green2, 1.8);
   });
   rect(s, 3.55, 3.94, 5.15, 0.55, C.panel, true, { color: C.panel2, width: 1 });
@@ -464,8 +471,9 @@ function matrix(slide, x, y, rows, cols, cell, accent = C.green, secondary = C.p
   tx(s, 'The question is:', 0.62, 2.65, 2.3, 0.25, { fontSize: 15, color: C.muted });
   tx(s, '“What does this workload need?”', 0.62, 3.08, 5.6, 0.52, { fontSize: 23, bold: true, color: C.green2 });
   tx(s, 'Predict  /  run  /  measure  /  explain', 0.62, 4.4, 4.6, 0.25, { fontSize: 11, color: C.white, bold: true, charSpacing: 1.1 });
-  grid(s, 7.0, 1.18, 6, 6, 0.38, 0.1);
-  tx(s, 'THANK YOU', 7.16, 4.2, 2.7, 0.25, { fontSize: 14, bold: true, color: C.black, align: 'center', charSpacing: 2 });
+  grid(s, 7.08, 1.18, 5, 5, 0.36, 0.1);
+  rect(s, 7.0, 3.88, 2.35, 0.72, C.green, true);
+  tx(s, 'THANK YOU', 7.12, 4.12, 2.1, 0.22, { fontSize: 14, bold: true, color: C.black, align: 'center', charSpacing: 2 });
   note(s, 'Close by asking learners to name one workload from their own field that might contain repeated, independent work. Invite them to open the Colab notebook and continue experimenting.');
 }
 
