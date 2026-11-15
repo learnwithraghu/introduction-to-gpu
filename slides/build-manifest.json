@@ -1,0 +1,18 @@
+{
+  "generatedAt": "2026-11-15T10:25:01.158Z",
+  "sources": {
+    "slides/build-deck.js": "21dc7f485987191354ffe6f7c6c9b3db29dd98210dbe7347c334e63f62654785",
+    "slides/slide-source-map.json": "42caa69bfbae05ff6be7be0a926a00e0b53255de6e3948035ba1112df78a8859",
+    "introduction-to-gpu/00-session-overview.md": "1844b8f9d13c88a830a26857061412816eafdb9d34792712d6df6f1243ade2e4",
+    "introduction-to-gpu/01-what-is-a-gpu.md": "7aa235e543026e8f7ed91c3f5911cf5c9f8dd5a0c46aa72f7a40b55e35d358b7",
+    "introduction-to-gpu/02-cpu-vs-gpu.md": "710e3b576d3d27cd83efc1d338084ebc724ae4f0dd6f22b24e46c4f19c737d33",
+    "introduction-to-gpu/03-gpu-anatomy.md": "864509ef63acfc0abdab2ea2dcec930d8f1123c8ddb5b462fe6afdf7e5541208",
+    "introduction-to-gpu/04-gpu-memory-and-data-movement.md": "1899ab07b4bdddbd417d0bdc7e6a9477ca62365340ee08e87f278983d1301a3f",
+    "introduction-to-gpu/05-google-colab-gpu-setup.md": "cb3789c806b6a5e3e30147d15b57a78235417049b4acc242c449bf353d2bf270",
+    "introduction-to-gpu/06-hands-on-lab-guide.md": "2ce3e0fdd839ec171f5b6d9a29ac70ed249a9bdc7b9897fb39384b0e21691fda",
+    "introduction-to-gpu/07-gpu-pitfalls-and-next-steps.md": "7253628f676694b34ce8b12817e845203f09121100601fe2e4e3c72d42215b99",
+    "introduction-to-gpu/08-free-session-to-paid-course.md": "55907bcab3ec0dffadeea94b5965a2ebf89f438b9f56630785ecda8da80d88e4",
+    "introduction-to-gpu/README.md": "c6ee57c37c59e3a3ecaae86fd8dcf50a942a168bd39b437277b9e38afb30e59f",
+    "introduction-to-gpu/introduction-to-gpu-colab.ipynb": "f7e37bfc9526bda4f84c20867ea6366268ffe7359e97e5ac2a46fb1d0e4667ce"
+  }
+}

@@ -1,61 +1,44 @@
 # GPU Memory and Data Movement
 
-## The Core Idea
+## The Warehouse and the Factory
 
-The CPU and GPU generally use separate memory spaces. To compute on the GPU, data often needs to move from host memory to device memory.
+The CPU and GPU generally use separate memory spaces. Think of CPU memory as a warehouse and GPU memory as a fast factory floor across the road.
 
 ```text
-CPU                  PCIe or interconnect             GPU
-+-----------+       --------------------       +-------------+
-| RAM       |  ---> data transfer ----------> | GPU memory  |
-| Python    |                                  | kernels     |
-+-----------+       <--- results ------------- +-------------+
+warehouse (CPU memory) -> road -> factory floor (GPU memory)
+factory result          -> road -> application
 ```
 
-The transfer is not free. A GPU can perform arithmetic very quickly, but it may spend significant time waiting for data to arrive.
+The factory may work very quickly, but a small delivery can still cost more time than the work itself.
 
 ## Workload Timing Model
 
 ```text
-Total time = input transfer + GPU computation + output transfer
+total time = input delivery + factory work + result delivery
 ```
 
-If the computation is tiny, transfer and launch overhead can be larger than the calculation itself. If the computation is large, the arithmetic savings may dominate.
+For a tiny calculation, delivery and setup may dominate. For a large calculation, the factory can earn back the trip.
 
-## A Warehouse Analogy
+## Batching
 
-The GPU is a very fast factory floor. CPU memory is a warehouse across the road. Sending one small box across the road is inefficient. Sending a full truckload makes the trip worthwhile.
-
-## Common Mistake
-
-This pattern can be slow:
+Sending one small box at a time is inefficient. Sending a full truckload is more worthwhile.
 
 ```python
+# Many small trips
 for item in items:
-    gpu_item = item.to("cuda")
-    result = process(gpu_item)
-```
+    result = process(item.to("cuda"))
 
-When possible, batch data and transfer it fewer times:
-
-```python
-batch = items.to("cuda")
-result = process(batch)
+# Fewer larger trips
+result = process(items.to("cuda"))
 ```
 
 ## Questions to Ask Students
 
-- Is a GPU benchmark fair if we exclude the data-transfer time?
-- When might excluding transfer time still be useful?
-- Why does batching often help?
-- What would happen if the dataset is larger than GPU memory?
+- Is a benchmark fair if it excludes delivery time?
+- When is kernel-only timing still useful?
+- How does batching change the trip?
+- What happens when the truck is larger than the factory floor?
 
 ## Instructor Note
 
-Use the notebook's explicit transfer benchmark to show that “GPU time” and “end-to-end application time” are different measurements. This is an important bridge to production design.
-
-## Further Reading
-
-- [PyTorch CUDA Semantics](https://docs.pytorch.org/docs/stable/notes/cuda.html)
-- [PyTorch Performance Tuning Guide](https://docs.pytorch.org/tutorials/recipes/recipes/tuning_guide.html)
-- [NVIDIA CUDA C Best Practices: Data Transfer Between Host and Device](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/)
+Use both measurements when appropriate: kernel timing explains the operation; end-to-end timing explains the product.

@@ -1,0 +1,24 @@
+{
+  "deck": "introduction-to-gpu-slides",
+  "sourceOfTruth": "introduction-to-gpu/*.md",
+  "slides": [
+    { "id": "title", "tier": "main", "sources": [{ "file": "00-session-overview.md", "heading": "# Introduction to GPUs: One-Hour Free Session", "treatment": "slide" }] },
+    { "id": "examples", "tier": "main", "sources": [{ "file": "00-session-overview.md", "heading": "## Opening Hook", "treatment": "slide-and-notes" }, { "file": "01-what-is-a-gpu.md", "heading": "## Start With Familiar Work", "treatment": "slide" }] },
+    { "id": "metaphor", "tier": "main", "sources": [{ "file": "01-what-is-a-gpu.md", "heading": "## Everyday Analogy: One Cook or an Assembly Line?", "treatment": "slide-and-notes" }] },
+    { "id": "pattern", "tier": "main", "sources": [{ "file": "01-what-is-a-gpu.md", "heading": "## The Simple Rule", "treatment": "slide" }, { "file": "01-what-is-a-gpu.md", "heading": "## Diagram: Similar Work in Parallel", "treatment": "slide" }] },
+    { "id": "fit", "tier": "main", "sources": [{ "file": "01-what-is-a-gpu.md", "heading": "## Good Fits", "treatment": "slide" }, { "file": "01-what-is-a-gpu.md", "heading": "## Poor Fits", "treatment": "slide" }] },
+    { "id": "workers", "tier": "main", "sources": [{ "file": "02-cpu-vs-gpu.md", "heading": "## Two Kinds of Workers", "treatment": "slide" }, { "file": "02-cpu-vs-gpu.md", "heading": "## Latency and Throughput", "treatment": "notes" }] },
+    { "id": "prediction", "tier": "main", "sources": [{ "file": "02-cpu-vs-gpu.md", "heading": "## Prediction Activity", "treatment": "slide-and-notes" }] },
+    { "id": "setup", "tier": "main", "sources": [{ "file": "05-google-colab-gpu-setup.md", "heading": "## Learner Steps", "treatment": "slide" }, { "file": "05-google-colab-gpu-setup.md", "heading": "## What We Verify", "treatment": "notes" }] },
+    { "id": "vector", "tier": "main", "sources": [{ "file": "06-hands-on-lab-guide.md", "heading": "## Lab 2: Vector Addition", "treatment": "slide-and-notes" }] },
+    { "id": "matrix", "tier": "main", "sources": [{ "file": "06-hands-on-lab-guide.md", "heading": "## Lab 3: Matrix Multiplication", "treatment": "slide-and-notes" }] },
+    { "id": "warehouse", "tier": "main", "sources": [{ "file": "04-gpu-memory-and-data-movement.md", "heading": "## The Warehouse and the Factory", "treatment": "slide-and-notes" }, { "file": "04-gpu-memory-and-data-movement.md", "heading": "## Workload Timing Model", "treatment": "slide" }] },
+    { "id": "benchmark", "tier": "main", "sources": [{ "file": "06-hands-on-lab-guide.md", "heading": "## Before Running Code", "treatment": "slide-and-notes" }, { "file": "04-gpu-memory-and-data-movement.md", "heading": "## Instructor Note", "treatment": "notes" }] },
+    { "id": "production", "tier": "main", "sources": [{ "file": "07-gpu-pitfalls-and-next-steps.md", "heading": "## Production Preview", "treatment": "slide-and-notes" }] },
+    { "id": "close", "tier": "main", "sources": [{ "file": "00-session-overview.md", "heading": "## Closing CTA", "treatment": "slide-and-notes" }] },
+    { "id": "appendix-anatomy", "tier": "appendix", "sources": [{ "file": "03-gpu-anatomy.md", "heading": "## The Simplified Map", "treatment": "slide-and-notes" }, { "file": "03-gpu-anatomy.md", "heading": "## Vector Addition as Assignment", "treatment": "notes" }] },
+    { "id": "appendix-troubleshooting", "tier": "appendix", "sources": [{ "file": "05-google-colab-gpu-setup.md", "heading": "## If Something Goes Wrong", "treatment": "slide-and-notes" }] },
+    { "id": "appendix-pitfalls", "tier": "appendix", "sources": [{ "file": "07-gpu-pitfalls-and-next-steps.md", "heading": "## Three Honest Lessons", "treatment": "slide" }] },
+    { "id": "appendix-course", "tier": "appendix", "sources": [{ "file": "08-free-session-to-paid-course.md", "heading": "## The Engineering Next Step", "treatment": "slide" }] }
+  ]
+}

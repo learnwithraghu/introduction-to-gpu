@@ -8,50 +8,19 @@ The free session answers:
 
 The paid course answers:
 
-> How do I package, deploy, operate, and control the cost of this GPU workload in the cloud?
+> How do I package, deploy, operate, and control the cost of this workload in the cloud?
 
-## Suggested Paid-Course Modules
+## The Engineering Next Step
 
-### Module 1: Turn Notebook Code into an Application
+The full course turns the notebook experiment into a repeatable system:
 
-- Separate configuration from computation.
-- Accept input paths and workload sizes as arguments.
-- Return structured results and error messages.
-- Add tests for CPU and GPU behavior.
+- Refactor notebook code into an application.
+- Package the workload in Docker.
+- Store inputs and outputs in S3.
+- Run the job on AWS Batch GPU compute.
+- Trigger and monitor it with Lambda.
+- Add metrics, retries, and cost controls.
 
-### Module 2: Package the Workload
+## Closing Message
 
-- Build a Docker image with PyTorch and CUDA compatibility.
-- Use a CPU fallback for local testing.
-- Keep images reproducible and reasonably small.
-
-### Module 3: Store Data in S3
-
-- Upload input data.
-- Pass S3 paths to the job.
-- Write output artifacts and metadata.
-
-### Module 4: Run with AWS Batch
-
-- Configure a compute environment with GPU-enabled instances.
-- Define a job queue and job definition.
-- Request the required number of GPUs.
-- Submit and monitor jobs.
-
-### Module 5: Trigger with Lambda
-
-- Validate a request.
-- Submit an AWS Batch job.
-- Return a job identifier.
-- Poll or notify when the job completes.
-
-### Module 6: Operate Responsibly
-
-- Log metrics and failures.
-- Set timeouts and retry policies.
-- Avoid leaving expensive GPU capacity idle.
-- Measure end-to-end performance and cost.
-
-## Closing Message for the Free Session
-
-> You have now used a GPU interactively. The next challenge is to make the same computation repeatable, observable, and cost-conscious. That is what we build in the full course.
+> You have now used a GPU interactively. The next challenge is to make the same computation repeatable, observable, and cost-conscious.

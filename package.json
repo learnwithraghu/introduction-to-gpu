@@ -1,0 +1,12 @@
+{
+  "name": "introduction-to-gpu",
+  "private": true,
+  "scripts": {
+    "build:slides": "node slides/build-deck.js",
+    "validate:slides": "node slides/validate-slide-sources.js"
+  },
+  "dependencies": {
+    "lucide-static": "^1.73.0",
+    "pptxgenjs": "^3.12.0"
+  }
+}
